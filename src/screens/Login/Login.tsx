@@ -32,9 +32,11 @@ const Login = () => {
   }
   return (
     <main>
-      <Input onChange={handleChange} />
-      <Button onClick={handleAdminSubmit}>Admin</Button>
-      <Button onClick={handleUserSubmit}>User</Button>
+      <div style={{ width: "400px", margin: "50px auto" }}>
+        <Input onChange={handleChange} style={{ marginBottom: "30px"}} />
+        <Button style={{ marginRight: 40 }} onClick={handleAdminSubmit}>Admin</Button>
+        <Button onClick={handleUserSubmit}>User</Button>
+      </div>
     </main>
   );
 };

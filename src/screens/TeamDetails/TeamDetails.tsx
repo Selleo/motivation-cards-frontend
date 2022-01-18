@@ -44,9 +44,13 @@ const TeamDetails = () => {
 
   return (
     <Layout>
-      {topMotivators.map((motivator, index) => (
-        <Card key={index} card={motivator} />
-      ))}
+      <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+        {topMotivators.map((motivator, index) => (
+          <div style={{ marginBottom: 40 }}>
+            <Card key={index} card={motivator} />
+          </div>
+        ))}
+      </div>
     </Layout>
   );
 };
