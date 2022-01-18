@@ -1,60 +1,91 @@
 :root {
-  --brand-color: #98C583;
-  --black-color: #1E1E2F;
-  --color-gray-500: #46466D;
-  --color-gray-400: #7373A6;
-  --color-gray-300: #B1B1CD;
-  --color-gray-200: #D0D0E1;
-  --color-gray-200: #F9F9FB;
-  --color-orange: #E5D0BE;
+  --brand-color: #98c583;
+  --black-color: #1e1e2f;
+  --color-gray-500: #46466d;
+  --color-gray-400: #7373a6;
+  --color-gray-300: #b1b1cd;
+  --color-gray-200: #d0d0e1;
+  --color-gray-200: #f9f9fb;
+  --color-orange: #e5d0be;
 }
 
-.card{
+@font-face {
+  font-family: "RobotoMono";
+  font-weight: 700;
+  src: local("RobotoMono"),
+    url(./assets/fonts/roboto-mono-v13-latin-700.woff) format("woff");
+}
+
+@font-face {
+  font-family: "RobotoMono";
+  font-weight: 700;
+  src: local("RobotoMono"),
+    url(./assets/fonts/roboto-mono-v13-latin-700.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "RobotoMono";
+  src: local("RobotoMono"),
+    url(./assets/fonts/roboto-mono-v13-latin-regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "RobotoMono";
+  src: local("RobotoMono"),
+    url(./assets/fonts/roboto-mono-v13-latin-regular.woff2) format("woff2");
+}
+
+.card {
   background-color: var(--color-orange);
+  font-family: "RobotoMono";
   padding: 24px;
-  width: 100%;
+  width: 500px;
   border-radius: 12px;
   overflow: hidden;
-  /* background:
-    url(logo.png) bottom center no-repeat,
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  /* background: url(logo.png) bottom center no-repeat,
     url(background-pattern.png) repeat; */
 }
 
-.card__description{
+.card__description {
   font-size: 1em;
   font-weight: bold;
 }
 
-.card__image{
-  width: 100px;
-  height: 100px;
+.card__image {
+  align-self: flex-end;
+  width: 50%;
+  /* overflow: hidden; */
 }
 
-.card__title{
+.card__title {
   font-size: 1.5em;
   font-size: 24px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.card__title::before{
+.card__title::before {
   background-color: red;
   bottom: -3px;
   box-sizing: border-box;
-  content: '';
+  content: "";
   display: inline-block;
   height: 3px;
   height: 3px;
   left: 0;
   opacity: 0;
   position: absolute;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   width: 20px;
   width: 50%;
   z-index: -1;
 }
 
-.loader{
+.loader {
   justify-content: center;
   align-items: center;
   display: flex;
@@ -62,7 +93,7 @@
   height: 100vh;
 }
 
-.workspace{
+.workspace {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -71,7 +102,7 @@
   width: 100%;
 }
 
-.workspace__submit{
+.workspace__submit {
   position: absolute;
   top: 60px;
   right: 20px;
