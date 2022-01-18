@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
-import { Select } from 'antd';
+import { Select, Button } from 'antd';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const User = () => {
   const navigate = useNavigate()
   const [teamList, setTeamList] = useState([])
+  const [selectedTeam, setSelectedTeam] = useState('')
   useEffect(() => {
     const getUserInfo = async () => {
       const response = await axios.get('https://motivation-cards-backend.herokuapp.com/api/v1/user/user_info', {
@@ -33,17 +34,24 @@ const User = () => {
     getTeams()
   }, [])
 
-  const handleTeamSubmit = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const team = event.target.value
-    navigate('/user-motivators')
+  const handleTeamSubmit = () => {
+    return axios.post('https://motivation-cards-backend.herokuapp.com/api/v1/user/teams', {
+      team_id: selectedTeam,
+    },
+    {
+      headers: {
+      'Authorization': `${localStorage.getItem('api_token')}`
+    }}).then(() => navigate('/user-motivators'))
   }
 
-  console.log(`team`, teamList)
+  const handleSelectChange = (event: string) => {
+    setSelectedTeam(event)
+  }
 
   return (
     <Layout>
       {teamList.length > 0 && (
-        <Select placeholder="Choose your team" onChange={(event) => handleTeamSubmit(event)}>
+        <Select placeholder="Choose your team" onChange={(event) => handleSelectChange(event)}>
           {teamList.map(({ id, name }) => (
             <Select.Option value={id} key={id}>
               {name}
@@ -51,6 +59,7 @@ const User = () => {
           ))}
         </Select>
       )}
+      <Button onClick={handleTeamSubmit}>Choose your team!</Button>
     </Layout>
   );
 };
