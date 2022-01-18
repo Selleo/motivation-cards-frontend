@@ -4,6 +4,7 @@ import {
   AliwangwangOutlined,
   TeamOutlined,
   IdcardOutlined,
+  PoweroffOutlined
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 interface LayoutProps {
@@ -12,36 +13,55 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
+
+  const role = localStorage.getItem('role')
   return (
     <section>
       <Menu onClick={() => {}} mode="horizontal">
-        <Menu.Item
-          onClick={() => navigate("/user")}
-          key="user"
-          icon={<UserOutlined />}
-        >
-          User
-        </Menu.Item>
-        <Menu.Item
+        {role === 'user' && (
+          <>
+            <Menu.Item
+              onClick={() => navigate("/user")}
+              key="user"
+              icon={<UserOutlined />}
+            >
+              User
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => navigate("/workspace")}
+              key="usermotivators"
+              icon={<IdcardOutlined />}
+            >
+              User Motivators
+            </Menu.Item>
+          </>
+        )}
+        {/* <Menu.Item
           onClick={() => navigate("/admin")}
           key="admin"
           icon={<AliwangwangOutlined />}
         >
           Admin
-        </Menu.Item>
+        </Menu.Item> */}
+        {role === 'admin' && (
+          <Menu.Item
+            onClick={() => navigate("/team-details")}
+            key="teamdetails"
+            icon={<TeamOutlined />}
+          >
+            Team Details
+          </Menu.Item>
+        )}
         <Menu.Item
-          onClick={() => navigate("/workspace")}
-          key="usermotivators"
-          icon={<IdcardOutlined />}
+          onClick={logout}
+          key="logout"
+          icon={<PoweroffOutlined />}
         >
-          User Motivators
-        </Menu.Item>
-        <Menu.Item
-          onClick={() => navigate("/team-details")}
-          key="teamdetails"
-          icon={<TeamOutlined />}
-        >
-          Team Details
+          Logout
         </Menu.Item>
       </Menu>
       {children}

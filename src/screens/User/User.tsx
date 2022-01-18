@@ -53,7 +53,7 @@ const User = () => {
           },
         }
       )
-      .then(() => navigate("workspace"));
+      .then(() => navigate("/workspace"));
   };
 
   const handleSelectChange = (event: string) => {

@@ -15,6 +15,7 @@ const Login = () => {
 
     const apiToken = response.data.api_token
     localStorage.setItem('api_token', apiToken)
+    localStorage.setItem('role', 'admin')
     navigate('/admin')
 
   }
@@ -26,6 +27,7 @@ const Login = () => {
 
     const apiToken = response.data.api_token
     localStorage.setItem('api_token', apiToken)
+    localStorage.setItem('role', 'user')
     navigate('/user')
   }
   return (
