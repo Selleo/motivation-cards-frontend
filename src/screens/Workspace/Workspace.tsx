@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button, Spin, Space } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+
+import axios from "axios";
 import {
   DndContext,
   closestCenter,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
   DragEndEvent,
@@ -18,23 +23,39 @@ import {
 import { Card } from "../../components";
 import { ICard } from "../../types/types";
 
-const imageUrl =
-  "https://i.pinimg.com/originals/bf/c2/67/bfc267127a451c7ad3f64b79db279af2.jpg";
-
 const Workspace = () => {
-  const [items, setItems] = useState<ICard[]>([
-    { description: "test desc", id: "1", title: "Item 1", imageUrl },
-    { description: "test desc", id: "2", title: "Item 2", imageUrl },
-    { description: "test desc", id: "3", title: "Item 3", imageUrl },
-    { description: "test desc", id: "4", title: "Item 4", imageUrl },
-    { description: "test desc", id: "5", title: "Item 5", imageUrl },
-    { description: "test desc", id: "6", title: "Item 6", imageUrl },
-    { description: "test desc", id: "7", title: "Item 7", imageUrl },
-    { description: "test desc", id: "8", title: "Item 8", imageUrl },
-  ]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [items, setItems] = useState<ICard[]>([]);
+
+  useEffect(() => {
+    const getCards = async () => {
+      try {
+        const {
+          data: { results },
+        } = await axios.get(
+          "https://motivation-cards-backend.herokuapp.com/api/v1/user/result",
+          {
+            headers: { Authorization: localStorage.getItem("api_token") || "" },
+          }
+        );
+        setItems(results);
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+      }
+    };
+    getCards();
+  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -52,20 +73,62 @@ const Workspace = () => {
     }
   };
 
+  const handleSubmit = async () => {
+    const data = items.map((item) => item.id);
+    setSubmitting(true);
+
+    try {
+      await axios.post(
+        `https://motivation-cards-backend.herokuapp.com/api/v1/user/results?results=[${data}]`,
+        {},
+        {
+          headers: {
+            Authorization: localStorage.getItem("api_token") || "",
+          },
+        }
+      );
+      setSubmitting(false);
+    } catch (e) {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="loader">
+        <Space size="middle">
+          <Spin size="large" />
+        </Space>
+      </div>
+    );
+  }
+
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <div className="workspace">
-          {items.map((item) => (
-            <Card key={item.id} card={item} />
-          ))}
-        </div>
-      </SortableContext>
-    </DndContext>
+    <>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          <div className="workspace">
+            {items.map((item) => (
+              <Card key={item.id} card={item} />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
+      <div className="workspace__submit">
+        <Button
+          loading={submitting}
+          onClick={() => handleSubmit()}
+          type="primary"
+          shape="circle"
+          icon={<UploadOutlined />}
+          size="large"
+        />
+      </div>
+    </>
   );
 };
 

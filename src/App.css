@@ -17,10 +17,24 @@
   font-weight: bold;
 }
 
+.loader{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1;
+  height: 100vh;
+}
+
 .workspace{
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
+}
+
+.workspace__submit{
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
