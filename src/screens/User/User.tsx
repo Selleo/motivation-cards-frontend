@@ -1,8 +1,15 @@
+import Layout from '../../components/Layout'
+import { Select } from 'antd';
+
 const User = () => {
   return (
-    <div>
-      <div>User</div>
-    </div>
+    <Layout>
+      <Select placeholder="Choose your team">
+        <Select.Option value="tgn">
+          TGN
+        </Select.Option>
+      </Select>
+    </Layout>
   );
 };
 

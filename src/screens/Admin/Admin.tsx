@@ -1,8 +1,10 @@
+import Layout from '../../components/Layout'
+
 const Admin = () => {
   return (
-    <div>
+    <Layout>
       <div>Admin</div>
-    </div>
+    </Layout>
   );
 };
 
