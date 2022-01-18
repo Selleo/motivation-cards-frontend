@@ -1,8 +1,10 @@
+import Layout from '../../components/Layout'
+
 const UserMotivators = () => {
   return (
-    <div>
+    <Layout>
       <div>UserMotivators</div>
-    </div>
+    </Layout>
   );
 };
 

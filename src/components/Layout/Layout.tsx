@@ -1,24 +1,25 @@
 import { Menu } from 'antd';
 import { UserOutlined, AliwangwangOutlined, TeamOutlined, IdcardOutlined } from '@ant-design/icons';
-
+import { useNavigate } from "react-router-dom";
 interface LayoutProps {
   children: React.ReactNode,
 }
 
 const Layout:React.FC<LayoutProps> = ({ children }) => {
+  const navigate = useNavigate()
   return (
     <section>
       <Menu onClick={() => {}} mode="horizontal">
-        <Menu.Item key="user" icon={<UserOutlined />}>
+        <Menu.Item onClick={() => navigate('/user')} key="user" icon={<UserOutlined />}>
           User
         </Menu.Item>
-        <Menu.Item key="admin" icon={<AliwangwangOutlined />}>
+        <Menu.Item onClick={() => navigate('/admin')} key="admin" icon={<AliwangwangOutlined />}>
           Admin
         </Menu.Item>
-        <Menu.Item key="usermotivators" icon={<IdcardOutlined />}>
+        <Menu.Item onClick={() => navigate('/user-motivators')} key="usermotivators" icon={<IdcardOutlined />}>
           User Motivators
         </Menu.Item>
-        <Menu.Item key="teamdetails" icon={<TeamOutlined />}>
+        <Menu.Item onClick={() => navigate('/team-details')} key="teamdetails" icon={<TeamOutlined />}>
           Team Details
         </Menu.Item>
       </Menu>
