@@ -10,12 +10,12 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Workspace as init route just for development */}
-      <Route path="/" element={<Workspace />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/login" element={<Login />} />
       <Route path="/team-details" element={<TeamDetails />} />
       <Route path="/user" element={<User />} />
       <Route path="/user-motivators" element={<UserMotivators />} />
+      <Route path="/workspace" element={<Workspace />} />
     </Routes>
   );
 };
