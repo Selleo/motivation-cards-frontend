@@ -14,14 +14,14 @@ const AppRoutes = () => {
       <Route path="/team-details" element={<TeamDetails />} />
       <Route path="/user" element={<User />} />
       <Route path="/workspace" element={<Workspace />} />
-      <Route
+      {/* <Route
         path="*"
         element={
           <Navigate
             to={localStorage.getItem("api_token") ? "/user" : "/login"}
           />
         }
-      />
+      /> */}
     </Routes>
   );
 };
