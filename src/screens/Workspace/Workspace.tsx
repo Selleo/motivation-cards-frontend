@@ -20,7 +20,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
-import { Card } from "../../components";
+import { Card, Layout } from "../../components";
 import { ICard } from "../../types/types";
 
 const Workspace = () => {
@@ -104,7 +104,7 @@ const Workspace = () => {
   }
 
   return (
-    <>
+    <Layout>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -128,7 +128,7 @@ const Workspace = () => {
           size="large"
         />
       </div>
-    </>
+    </Layout>
   );
 };
 
