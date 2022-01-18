@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Button, Input } from "antd";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)
 
@@ -13,6 +15,8 @@ const Login = () => {
 
     const apiToken = response.data.api_token
     localStorage.setItem('api_token', apiToken)
+    navigate('/admin')
+
   }
 
   const handleUserSubmit = async () => {
@@ -22,6 +26,7 @@ const Login = () => {
 
     const apiToken = response.data.api_token
     localStorage.setItem('api_token', apiToken)
+    navigate('/user')
   }
   return (
     <main>
