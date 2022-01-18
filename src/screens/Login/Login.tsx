@@ -1,14 +1,33 @@
-import React from "react";
 import { useState } from "react";
-import ReactDOM from "react-dom";
 import { Button, Input } from "antd";
+import axios from 'axios'
 
 const Login = () => {
+  const [email, setEmail] = useState('')
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)
+
+  const handleAdminSubmit = async () => {
+    const response = await axios.post('https://motivation-cards-backend.herokuapp.com/api/v1/admin/login', {
+      email
+    })
+
+    const apiToken = response.data.api_token
+    localStorage.setItem('api_token', apiToken)
+  }
+
+  const handleUserSubmit = async () => {
+    const response = await axios.post('https://motivation-cards-backend.herokuapp.com/api/v1/user/login', {
+      email
+    })
+
+    const apiToken = response.data.api_token
+    localStorage.setItem('api_token', apiToken)
+  }
   return (
     <main>
-      <Button>Admin</Button>
-      <Button>User</Button>
-      <Input />
+      <Input onChange={handleChange} />
+      <Button onClick={handleAdminSubmit}>Admin</Button>
+      <Button onClick={handleUserSubmit}>User</Button>
     </main>
   );
 };
