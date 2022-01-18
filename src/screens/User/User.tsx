@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
 import { Select, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import Layout from "../../components/Layout";
 
 const User = () => {
   const navigate = useNavigate();
   const [teamList, setTeamList] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
+
   useEffect(() => {
     const getUserInfo = async () => {
       const response = await axios.get(
