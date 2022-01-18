@@ -1,6 +1,6 @@
 export interface ICard {
   description?: string;
   id: string;
-  imageUrl: string;
+  image_url: string;
   title: string;
 }

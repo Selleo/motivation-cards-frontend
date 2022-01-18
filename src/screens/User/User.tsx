@@ -53,7 +53,7 @@ const User = () => {
           },
         }
       )
-      .then(() => navigate("/user-motivators"));
+      .then(() => navigate("workspace"));
   };
 
   const handleSelectChange = (event: string) => {

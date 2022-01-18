@@ -24,7 +24,7 @@ const Card: React.FC<ICardProps> = ({ card }) => {
       {...attributes}
       {...listeners}
     >
-      <img className="card__image" alt="card" src={card.imageUrl} />
+      <img className="card__image" alt="card" src={card.image_url} />
       <div className="card__title">{card.title}</div>
       <div className="card__description">{card.description}</div>
     </div>
