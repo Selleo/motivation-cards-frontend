@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import Admin from '../Admin'
-import Login from '../Login'
-import TeamDetails from '../TeamDetails'
-import User from '../User'
-import UserMotivators from '../UserMotivators'
+import Admin from "../Admin";
+import Login from "../Login";
+import TeamDetails from "../TeamDetails";
+import User from "../User";
+import UserMotivators from "../UserMotivators";
 const AppRoutes = () => {
   return (
     <Routes>

@@ -1,8 +1,15 @@
+import React from "react";
+import { useState } from "react";
+import ReactDOM from "react-dom";
+import { Button, Input } from "antd";
+
 const Login = () => {
   return (
-    <div>
-      <div>Main</div>
-    </div>
+    <main>
+      <Button>Admin</Button>
+      <Button>User</Button>
+      <Input />
+    </main>
   );
 };
 
